@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <div>
         <ol>
+          {/* componente reusable para cada personaje */}
           {personajes.map((personaje) => (
             <ul key={personaje.name}>{personaje.name}</ul>
           ))}
