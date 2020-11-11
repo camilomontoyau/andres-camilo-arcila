@@ -34,6 +34,8 @@
 }
 
 .container--characters {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -41,6 +43,7 @@
 
 .card--character--wrapper {
   margin: 0.5rem;
+  display: block;
 }
 
 @keyframes App-logo-spin {
@@ -49,5 +52,11 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .card--character--wrapper {
+    width: 100%;
   }
 }
