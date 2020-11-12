@@ -27,14 +27,14 @@ function App() {
       //   .then((response) => setCharacters(translateKeys(response.results)));
 
       // vas a usar axios
-      axios.get("https://swapi.dev/api/people/")
-        .then((response) => setCharacters(translateKeys(response.data.results)));
+      // axios.get("https://swapi.dev/api/people/")
+      //   .then((response) => setCharacters(translateKeys(response.data.results)));
 
       // vas a usar async / await
-      // const response = await fetch("https://swapi.dev/api/people/");
-      // const json = await response.json();
-      // const charactersFetch = json.results;
-      // setCharacters(translateKeys(charactersFetch));
+      const response = await fetch("https://swapi.dev/api/people/");
+      const json = await response.json();
+      const charactersFetch = json.results;
+      setCharacters(translateKeys(charactersFetch));
     }
     fetchData();
   }, []);
