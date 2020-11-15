@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>230</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>*Character*
+--
+id_character: int
+name: varchar
+gender: varchar
+birth_year: varchar
+height: int
+mass: int
+eye_color: varchar
+hair_color: varchar
+skin_color: varchar</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
