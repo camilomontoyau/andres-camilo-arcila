@@ -1,34 +1,34 @@
 import IService from "../service.interface.js";
 
-export default class ICharacterService extends IService{
-    constructor(){
+export default class ICharacterService extends IService {
+    constructor() {
         super();
-        if(this.constructor == ICharacterService){
+        if (this.constructor == ICharacterService) {
             throw new Error("Abstract classes can't be instantiated.");
         }
     }
 
-    getRouter() {
+    getRouter = () => {
         throw new Error("Method must be implemented.")
     }
 
-    findCharacters(request, response) {
+    findCharacters = (request, response) => {
         throw new Error("Method must be implemented.")
     }
 
-    findCharacterById(request, response) {
+    findCharacterById = (request, response) => {
         throw new Error("Method must be implemented.")
     }
 
-    createCharacter(request, response) {
+    createCharacter = (request, response) => {
         throw new Error("Method must be implemented.")
     }
 
-    updateCharacter(request, response) {
+    updateCharacter = (request, response) => {
         throw new Error("Method must be implemented.")
     }
 
-    deleteCharacter(request, response) {
+    deleteCharacter = (request, response) => {
         throw new Error("Method must be implemented.")
     }
 }

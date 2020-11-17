@@ -3,22 +3,22 @@ import bodyParser from 'body-parser';
 import IService from '../api/service.interface.js';
 
 export default class Application {
-    constructor(port, services){
+    constructor(port, services) {
         this.app = express();
         this.port = port;
         this.initializeMiddleware();
         this.initializeServices(services);
     }
 
-    initializeMiddleware(){
+    initializeMiddleware = () => {
         this.app.use(bodyParser.json());
     }
 
-    initializeServices(services){
+    initializeServices = (services) => {
         services.forEach(service => this.app.use("/", service.getRouter()));
     }
 
-    start(){
+    start = () => {
         this.app.listen(this.port, () => console.log(`app listening on port ${this.port}`));
     }
 }
