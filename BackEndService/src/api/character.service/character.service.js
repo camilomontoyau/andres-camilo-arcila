@@ -1,40 +1,47 @@
 import ICharacterService from './character.service.interface.js';
-import express from 'express';
+
+import CharacterController from '../../controller/character.controller/character.controller.js';
 
 export default class CharacterService extends ICharacterService {
-    constructor(path, router) {
+    constructor(path, router, characterController) {
         super();
 
         this.path = path;
         this.router = router;
+        this.characterController = characterController;
         this.initializeRoutes();
     }
 
-    getRouter() {
+    getRouter = () => {
         return this.router;
     }
 
-    initializeRoutes() {
-        this.router.get(this.path.concat("/allcharacters"), this.findCharacters);
+    initializeRoutes = () => {
+        this.router.get(this.path.concat("/all"), this.findCharacters);
+        this.router.get(this.path.concat("/id/:id"), this.findCharacterById);
+        this.router.post(this.path.concat(""), this.createCharacter);
+        this.router.put(this.path.concat(""), this.updateCharacter);
+        this.router.delete(this.path.concat(""), this.deleteCharacter);
     }
 
-    findCharacters(request, response) {
+    findCharacters = (request, response) => {
+        this.characterController.findCharacters(request, response);
+    }
+
+    findCharacterById = (request, response) => {
+        const id = request.params.id;
+        response.status(200).json(`character ${id}`);
+    }
+
+    createCharacter = (request, response) => {
         response.status(200).json("characters");
     }
 
-    findCharacterById(request, response) {
-        
+    updateCharacter = (request, response) => {
+        response.status(200).json("characters");
     }
 
-    createCharacter(request, response) {
-        
-    }
-
-    updateCharacter(request, response) {
-        
-    }
-
-    deleteCharacter(request, response) {
-        
+    deleteCharacter = (request, response) => {
+        response.status(200).json("characters");
     }
 }
