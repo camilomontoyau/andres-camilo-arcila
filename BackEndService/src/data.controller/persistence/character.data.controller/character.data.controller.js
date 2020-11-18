@@ -1,3 +1,5 @@
+import { databaseConfig } from '../../../../config.js';
+
 import pgPromise from 'pg-promise';
 
 import ICharacterDataController from "./character.data.controller.interface.js";
@@ -6,23 +8,43 @@ export default class CharacterDataController extends ICharacterDataController {
     constructor() {
         super();
 
-        this.pgPromise = pgPromise();
-        this.database = this.pgPromise("postgres://postgres:root@localhost:5432/star-wars");
+        this.database = pgPromise()(`postgres://${databaseConfig.USER}:${databaseConfig.PASSWORD}@${databaseConfig.HOST}:${databaseConfig.PORT}/${databaseConfig.DATABASE}`);
     }
 
     findAll = async () => {
-        return await this.database.one("SELECT * FROM character")
+        return await this.database.any("SELECT * FROM character");
     }
 
-    findById = (id) => {
+    findById = async (id) => {
+        return await this.database.one("SELECT * FROM character WHERE id_character = $1", [id]);
     }
 
-    create = (data) => {
+    create = async (data) => {
+        let query = "";
+        let keysString = "";
+        let valuesString = "";
+        let commaFlag = true;
+
+        for (let key in data) {
+            if (commaFlag) {
+                keysString = keysString.concat(`${key}`);
+                valuesString = valuesString.concat(`\${${key}}`);
+                commaFlag = false;
+            } else {
+                keysString = keysString.concat(`,${key}`);
+                valuesString = valuesString.concat(`,\${${key}}`);
+            }
+        }
+
+        query = `INSERT INTO character(${keysString}) `
+            + `VALUES (${valuesString}) RETURNING *`;
+
+        return await this.database.one(query, data);
     }
 
-    update = (data) => {
+    update = async (data) => {
     }
 
-    deleteById = (id) => {
+    deleteById = async (id) => {
     }
 }

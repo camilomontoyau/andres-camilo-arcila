@@ -19,11 +19,26 @@ export default class CharacterController extends ICharacterController {
     }
 
     findCharacterById = (request, response) => {
-        response.status(200).json("characters");
+        const id = request.params.id
+        this.characterDataController.findById(id)
+            .then((data) => {
+                response.status(200).json(data);
+            })
+            .catch((error) => {
+                this.handleError(error, response);
+            });
     }
 
     createCharacter = (request, response) => {
-        response.status(200).json("characters");
+        const data = request.body
+        this.characterDataController.create(data)
+            .then((data) => {
+                response.status(200).json(data);
+            })
+            .catch((error) => {
+                console.log(error);
+                this.handleError(error, response);
+            });
     }
 
     updateCharacter = (request, response) => {
@@ -32,5 +47,16 @@ export default class CharacterController extends ICharacterController {
 
     deleteCharacter = (request, response) => {
         response.status(200).json("characters");
+    }
+
+    handleError = (error, response) => {
+        const errorCode = error.code;
+        if (errorCode === "ECONNREFUSED") {
+            console.log(error);
+            response.status(503).json("ERROR: the server is currently unable to handle the request");
+        }
+        else {
+            response.status(400).json(error.message);
+        }
     }
 }
