@@ -21,7 +21,7 @@ export default class CharacterService extends ICharacterService {
         this.router.get(this.path.concat("/id/:id"), this.findCharacterById);
         this.router.post(this.path.concat(""), this.createCharacter);
         this.router.put(this.path.concat(""), this.updateCharacter);
-        this.router.delete(this.path.concat(""), this.deleteCharacter);
+        this.router.delete(this.path.concat("/id/:id"), this.deleteCharacter);
     }
 
     findCharacters = (request, response) => {
