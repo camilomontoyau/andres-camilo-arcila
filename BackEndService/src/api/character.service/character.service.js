@@ -29,19 +29,18 @@ export default class CharacterService extends ICharacterService {
     }
 
     findCharacterById = (request, response) => {
-        const id = request.params.id;
-        response.status(200).json(`character ${id}`);
+        this.characterController.findCharacterById(request, response);
     }
 
     createCharacter = (request, response) => {
-        response.status(200).json("characters");
+        this.characterController.createCharacter(request, response);
     }
 
     updateCharacter = (request, response) => {
-        response.status(200).json("characters");
+        this.characterController.updateCharacter(request, response);
     }
 
     deleteCharacter = (request, response) => {
-        response.status(200).json("characters");
+        this.characterController.deleteCharacter(request, response);
     }
 }
