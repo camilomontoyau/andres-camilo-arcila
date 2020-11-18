@@ -21,4 +21,4 @@ class Main {
     }
 }
 
-(() => new Main(3000).start())();
+(() => new Main(5000).start())();
