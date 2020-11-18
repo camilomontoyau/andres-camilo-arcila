@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import CharacterCard from './Components/CharacterCard/CharacterCard';
 
+const apiURI = "http://localhost:5000/characters/all";
+
 const translateKeys = (array) => {
   return array.map(value => {
     return ({
@@ -22,18 +24,19 @@ function App() {
   const [characters, setCharacters] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      // fetch("https://swapi.dev/api/people/")
+      // fetch(apiURI)
       //   .then((r) => r.json())
-      //   .then((response) => setCharacters(translateKeys(response.results)));
+      //   .then((response) => setCharacters(translateKeys(response)));
 
       // vas a usar axios
-      // axios.get("https://swapi.dev/api/people/")
-      //   .then((response) => setCharacters(translateKeys(response.data.results)));
+      // axios.get(apiURI)
+      //   .then((response) => setCharacters(translateKeys(response.data)));
 
       // vas a usar async / await
-      const response = await fetch("https://swapi.dev/api/people/");
+      const response = await fetch(apiURI);
       const json = await response.json();
-      const charactersFetch = json.results;
+      const charactersFetch = json;
+      console.log(charactersFetch, json, response);
       setCharacters(translateKeys(charactersFetch));
     }
     fetchData();
