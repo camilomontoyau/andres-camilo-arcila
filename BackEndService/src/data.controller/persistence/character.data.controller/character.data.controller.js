@@ -43,6 +43,24 @@ export default class CharacterDataController extends ICharacterDataController {
     }
 
     update = async (data) => {
+        let query = "";
+        let valuesString = "";
+        let commaFlag = true;
+
+        for (let key in data) {
+            if (commaFlag) {
+                valuesString = valuesString.concat(`${key} = \${${key}}`);
+                commaFlag = false;
+            } else {
+                valuesString = valuesString.concat(`,${key} = \${${key}}`);
+            }
+        }
+
+        query = `UPDATE character `
+            + `SET ${valuesString} `
+            + `WHERE id_character=${data.id_character} RETURNING *`;
+        console.log(query);
+        return await this.database.one(query, data);
     }
 
     deleteById = async (id) => {

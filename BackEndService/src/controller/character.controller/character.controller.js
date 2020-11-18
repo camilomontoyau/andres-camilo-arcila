@@ -42,7 +42,15 @@ export default class CharacterController extends ICharacterController {
     }
 
     updateCharacter = (request, response) => {
-        response.status(200).json("characters");
+        const data = request.body
+        this.characterDataController.update(data)
+            .then((data) => {
+                response.status(200).json(data);
+            })
+            .catch((error) => {
+                console.log(error);
+                this.handleError(error, response);
+            });
     }
 
     deleteCharacter = (request, response) => {
