@@ -64,5 +64,6 @@ export default class CharacterDataController extends ICharacterDataController {
     }
 
     deleteById = async (id) => {
+        return await this.database.one("DELETE FROM character WHERE id_character = $1 RETURNING *", [id]);
     }
 }

@@ -19,7 +19,7 @@ export default class CharacterController extends ICharacterController {
     }
 
     findCharacterById = (request, response) => {
-        const id = request.params.id
+        const id = request.params.id;
         this.characterDataController.findById(id)
             .then((data) => {
                 response.status(200).json(data);
@@ -30,31 +30,36 @@ export default class CharacterController extends ICharacterController {
     }
 
     createCharacter = (request, response) => {
-        const data = request.body
+        const data = request.body;
         this.characterDataController.create(data)
             .then((data) => {
                 response.status(200).json(data);
             })
             .catch((error) => {
-                console.log(error);
                 this.handleError(error, response);
             });
     }
 
     updateCharacter = (request, response) => {
-        const data = request.body
+        const data = request.body;
         this.characterDataController.update(data)
             .then((data) => {
                 response.status(200).json(data);
             })
             .catch((error) => {
-                console.log(error);
                 this.handleError(error, response);
             });
     }
 
     deleteCharacter = (request, response) => {
-        response.status(200).json("characters");
+        const id = request.params.id;
+        this.characterDataController.deleteById(id)
+            .then((data) => {
+                response.status(200).json(data);
+            })
+            .catch((error) => {
+                this.handleError(error, response);
+            });
     }
 
     handleError = (error, response) => {
