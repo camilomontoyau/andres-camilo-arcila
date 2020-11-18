@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import IService from '../api/service.interface.js';
 
 export default class Application {
@@ -12,6 +13,7 @@ export default class Application {
 
     initializeMiddleware = () => {
         this.app.use(bodyParser.json());
+        this.app.use(cors());
     }
 
     initializeServices = (services) => {
